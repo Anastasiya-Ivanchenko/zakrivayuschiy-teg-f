@@ -1,9 +1,10 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
 
-:root.theme-light {
-    --background-image: repeating-linear-gradient(to right, #d3d3d3, rgb(211 211 211 / 0) 2px),
-    repeating-linear-gradient(to bottom, #d3d3d3, rgb(211 211 211 / 0) 2px),
-    repeating-linear-gradient(#e7e7e7, #1a1a1a);
+:root {
+    --background-image: repeating-linear-gradient(to right, #d3d3d3 0px 2px, transparent 2px 4px),
+      repeating-linear-gradient(to bottom, #d3d3d3 0px 2px, transparent 2px 4px),
+      linear-gradient(#e7e7e7 0.01%, #1a1a1a);
+
     --text-inter: "Inter-Variable";
     --text-press: "PressStart2P-Regular";
     --font-weight-title: 700;
@@ -18,4 +19,3 @@
     --color-heart-sparks: #FF0000;
     --color-hover-button: #fff;
 }
-

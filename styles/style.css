@@ -13,33 +13,18 @@
 Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 
 */
-
-@font-face {
-  font-display: swap;
-  font-family: "Inter-Variable";
-  src: local("Inter-Variable"),
-  url(../fonts/Inter-Variable.woff2) format("woff2 supports variations"),
-  url(../fonts/Inter-Variable.woff2) format("woff2-variations");
-  font-weight: 400 700;
-}
-
-@font-face {
-  font-weight: normal;
-  font-display: swap;
-  font-family: 'PressStart2P-Regular';
-  src: url(../fonts/PressStart2P-Regular.woff) format('woff');
-}
-
 .page {
   min-inline-size: 375px;
   min-block-size: 100dvb;
-  background-image: var(--background-image);
+  background-image: var(--background-image, repeating-linear-gradient(to right, #d3d3d3 0px 2px, transparent 2px 4px),
+  repeating-linear-gradient(to bottom, #d3d3d3 0px 2px, transparent 2px 4px),
+  linear-gradient(#e7e7e7 0.01%, #1a1a1a));
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   object-fit: cover;
   font-family: var(--text-inter, Arial, sans-serif);
-  font-weight: var(--font-weight-text);
+  font-weight: var(--font-weight-text, 400);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,14 +36,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 368px;
-  background-color: var(--background-color);
-  font-family: var(--text-press);
-  border: 2px solid var(--accent-color-text);
+  background-color: var(--background-color, #fff);
+  font-family: var(--text-press, fantasy);
+  border: 2px solid var(--accent-color-text, #000);
   text-transform: uppercase;
   margin: 0 0 100px 0;
   gap: 25px;
   margin-top: 100px;
+  padding-block-end: 20px;
+  padding-block-start: 120px;
 }
 
 .width_block {
@@ -68,20 +54,19 @@
 .div__title {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 20px;
-  padding-top: 105px;
-  color: var(--accent-color-text);
+  padding-top: 20px;
+  color: var(--accent-color-text, #000);
 }
 
 .header__title {
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-title, clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem));
   line-height: 65px;
 }
 
 .header__subtitle {
-  font-size: var(--font-size-subtitle);
+  font-size: var(--font-size-subtitle, clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem));
 }
 
 .theme-menu__list {
@@ -92,7 +77,7 @@
   gap: 10px;
   font-size: 14px;
   line-height: 14px;
-  color: var(--accent-color-menu);
+  color: var(--accent-color-menu, #000);
 }
 
 .theme-menu__button {
@@ -109,7 +94,7 @@
   transition: opacity 0.3s ease;
 }
 
-.theme-menu__button:focus-visible {
+.theme-menu__button:focus {
   outline: none;
 }
 
@@ -121,7 +106,7 @@
   content: '';
   display: block;
   width: 0%;
-  height: 1px;
+  height: 2px;
   background-color: currentColor;
   opacity: 1;
   transform: scaleX(0);
@@ -166,8 +151,8 @@
 }
 
 .section_sprint {
-  background-color: var(--background-color);
-  border: 2px solid var(--accent-color-text);
+  background-color: var(--background-color, #fff);
+  border: 2px solid var(--accent-color-text, #000);
 }
 
 .image__wrapper {
@@ -177,51 +162,82 @@
   min-block-size: 375px;
 }
 
-@supports (
-  (text-stroke: 1px var(--label-text-shadow)) or
-    (-webkit-text-stroke: 1px var( --background-color))
-) {
-  .image__label {
-    -webkit-text-stroke: 1px var( --background-color);
-    text-shadow: none;
-  }
-}
-
 .image__label {
   position: absolute;
   inset-inline-end: 13px;
   inset-block-start: 24px;
-  font-family: var(--text-press);
+  font-family: var(--text-press, fantasy);
   font-size: 14px;
-  font-weight: var(--font-weight-text);
+  font-weight: var(--font-weight-text, 400);
   line-height: 14px;
   mix-blend-mode: hard-light;
-  color: var(--accent-color-text);
-  -webkit-text-stroke: 1px var( --background-color);
+  color: var(--accent-color-text, #000);
   opacity: 50%;
   text-shadow: 0 0 1px var(--page-background-color, #ffffff);
 }
 
+@supports (
+  (text-stroke: 1px var(--background-color, #fff)) or
+    (-webkit-text-stroke: 1px var(--background-color, #fff))
+) {
+  .image__label {
+    -webkit-text-stroke: 1px var( --background-color, #fff);
+    text-stroke: 1px var( --background-color, #fff);
+    text-shadow: none;
+  }
+}
+
+.logo-card {
+  width: 100%;
+  display: block;
+}
 
 .logo__zero-sprint {
-  width: 100%;
-  display: inline-block;
+  filter: grayscale(1);
+}
+
+.logo__one-sprint {
+  filter: blur(5px);
+}
+
+.logo__one-to-sprint {
+  filter: brightness(30%);
+}
+
+.logo__two-sprint {
+  filter: contrast(150%);
+}
+
+.logo__two-to-sprint {
+  filter: grayscale(60%);
+}
+
+.logo__three-sprint {
+  filter: hue-rotate(0.5turn);
+}
+
+.logo__three-to-sprint {
+  filter: invert(76%);
+}
+
+.logo__thour-sprint {
+  filter: sepia(0.7) hue-rotate(0.2turn);
 }
 
 .title__block {
-  color: var(--accent-color-text);
+  color: var(--accent-color-text, #000);
   font-size: 18px;
-  font-weight: var(--font-weight-title);
+  font-weight: var(--font-weight-title, 700);
   padding: 3px 10px 3px 10px;
   line-height: 22px;
   font-family: inherit;
 }
 
 .text__block {
-  color: var(--accent-color-text);
+  color: var(--accent-color-text, #000);
   font-family: inherit;
   font-size: 18px;
-  font-weight: var(--font-weight-text);
+  font-weight: var(--font-weight-text, 400);
   padding-top: 25px;
   padding-left: 25px;
   padding-right: 25px;
@@ -242,26 +258,26 @@
   cursor: pointer;
 }
 
-.card__like-button {
+.button {
   min-width: 130px;
   max-width: clamp(19.125rem, 2.723vw + 18.487rem, 20.938rem);
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: var(--background-color, #fff);
   position: relative;
   overflow: hidden;
   cursor: pointer;
   transition: 0.5s;
-  border: 1px solid var(--accent-color-text);
+  border: 1px solid var(--accent-color-text, #000);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card__like-button::before {
+.button::before {
   content: '';
   display: block;
-  background-color: var(--accent-color-text);
+  background-color: var(--accent-color-text, #000);
   height: 100%;
   width: 0;
   position: absolute;
@@ -270,22 +286,22 @@
   transition: .5s;
 }
 
-.card__like-button:hover::before {
+.button:hover::before {
   width: 100%;
 }
 
-.card__like-button:focus-visible {
+.button:focus-visible {
   outline: none;
-  box-shadow: 2px 2px 0 0 var(--accent-color-text);
+  box-shadow: 2px 2px 0 0 var(--accent-color-text, #000);
   transition: box-shadow 0.3s;
 }
 
 .button__text {
   mix-blend-mode: difference;
   z-index: 1;
-  color: var(--color-hover-button);
-  font-weight: var(--font-weight-text);
-  font-family: var(--text-press);
+  color: var(--color-hover-button, #fff);
+  font-weight: var(--font-weight-text, 400);
+  font-family: var(--text-press, fantasy);
   font-size: 14px;
   line-height: 90%;
 }
@@ -311,12 +327,12 @@
 }
 
 .like-icon .core {
-  fill: var(--background-color);
+  fill: var(--background-color, #fff);
   transition: fill 0.3s linear 0.03s;
 }
 
 .like-icon:hover .core {
-  fill: var(--accent-color-text);
+  fill: var(--accent-color-text, #000);
   transition: fill 0.3s linear;
 }
 
@@ -326,32 +342,32 @@
 }
 
 .like-icon:hover .main-body {
-  fill: var(--accent-color-text);
+  fill: var(--accent-color-text, #000);
   transition: fill 0.3s linear 0.05s;
 }
 
 .like-icon:active .core {
-    fill: var(  --color-heart-sparks);
+    fill: var(--color-heart-sparks, #FF0000);
     transition: fill 0.3s linear;
   }
   
   .like-icon:active .main-body {
-    fill: var(--color-heart-sparks);
+    fill: var(--color-heart-sparks, #FF0000);
     transition: fill 0.3s linear 0.05s;
   }
 
   .like-icon.is-liked .core {
-    fill: var(  --color-heart-sparks);
+    fill: var(--color-heart-sparks, #FF0000);
     transition: fill 0.3s linear;
   }
   
   .like-icon.is-liked .main-body {
-    fill: var(--color-heart-sparks);
+    fill: var(--color-heart-sparks, #FF0000);
     transition: fill 0.3s linear 0.03s;
   }
   
   .like-icon.is-liked .contour {
-    fill: var(--color-heart-sparks);
+    fill: var(--color-heart-sparks, #FF0000);
     transition: fill 0.3s linear 0.05s;
   }
   
@@ -369,12 +385,16 @@
   max-width: max-content;
   padding: 30px;
   gap: 30px;
-  color: var( --accent-color-text);
+  color: var(--accent-color-text, #000);
 }
 
 dialog::backdrop {
   background-color: #000000;
   opacity: 75%;
+}
+
+.modal {
+  background-color: var(--background-color, #fff);
 }
 
 .modal__dialog {
@@ -393,15 +413,14 @@ dialog::backdrop {
   height: 39px;
 }
 
-.button {
+.button-ok {
   height: 38px;
 }
 
   @media (width <= 376px) {
-    .div__title {
-      padding-top: 120px;
+    .header {
+      padding-block-start: 90px;
     }
-  
     .button__save {
       flex-direction: column;
     }

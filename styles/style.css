@@ -24,7 +24,7 @@
   background-attachment: fixed;
   object-fit: cover;
   font-family: var(--text-inter, Arial, sans-serif);
-  font-weight: var(--font-weight-text, 400);
+  font-variation-settings: "wght" var(--font-weight-text, 400);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,8 @@
   gap: 25px;
   margin-top: 100px;
   padding-block-end: 20px;
-  padding-block-start: 120px;
+  padding-block-start: 136px;
+  min-height: 368px;
 }
 
 .width_block {
@@ -56,7 +57,6 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-top: 20px;
   color: var(--accent-color-text, #000);
 }
 
@@ -72,12 +72,11 @@
 .theme-menu__list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  gap: 11px;
   font-size: 14px;
   line-height: 14px;
   color: var(--accent-color-menu, #000);
+  margin-left: 12px;
 }
 
 .theme-menu__button {
@@ -160,15 +159,16 @@
   border-block-start: 2px solid #000;
   border-block-end: 2px solid #000;
   min-block-size: 375px;
+  outline: 1px solid var(--accent-color-text);
 }
 
 .image__label {
   position: absolute;
+  z-index: 1;
   inset-inline-end: 13px;
   inset-block-start: 24px;
   font-family: var(--text-press, fantasy);
   font-size: 14px;
-  font-weight: var(--font-weight-text, 400);
   line-height: 14px;
   mix-blend-mode: hard-light;
   color: var(--accent-color-text, #000);
@@ -177,12 +177,13 @@
 }
 
 @supports (
-  (text-stroke: 1px var(--background-color, #fff)) or
+  (text-rendering: 1px var(--background-color, #fff))
+  or
     (-webkit-text-stroke: 1px var(--background-color, #fff))
 ) {
   .image__label {
     -webkit-text-stroke: 1px var( --background-color, #fff);
-    text-stroke: 1px var( --background-color, #fff);
+    text-rendering: 1px var( --background-color, #fff);
     text-shadow: none;
   }
 }
@@ -227,17 +228,16 @@
 .title__block {
   color: var(--accent-color-text, #000);
   font-size: 18px;
-  font-weight: var(--font-weight-title, 700);
   padding: 3px 10px 3px 10px;
   line-height: 22px;
   font-family: inherit;
+  font-variation-settings: "wght" var(--font-weight-title, 700)
 }
 
 .text__block {
   color: var(--accent-color-text, #000);
   font-family: inherit;
   font-size: 18px;
-  font-weight: var(--font-weight-text, 400);
   padding-top: 25px;
   padding-left: 25px;
   padding-right: 25px;
@@ -250,12 +250,22 @@
   padding-right: 25px;
   padding-bottom: 25px;
   padding-top: 25px;
+  gap: 5px;
 }
 
 .card__icon-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  padding: 0;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border: 2px solid var(--accent-color-text, #000);
 }
 
 .button {
@@ -268,7 +278,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: 0.5s;
-  border: 1px solid var(--accent-color-text, #000);
+  border: 2px solid var(--accent-color-text, #000);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -300,7 +310,6 @@
   mix-blend-mode: difference;
   z-index: 1;
   color: var(--color-hover-button, #fff);
-  font-weight: var(--font-weight-text, 400);
   font-family: var(--text-press, fantasy);
   font-size: 14px;
   line-height: 90%;
@@ -400,12 +409,16 @@ dialog::backdrop {
 .modal__dialog {
   display: flex;
   font-size: 14px;
-  max-width: 294px;
   gap: 20px;
+  align-items: center;
 }
 
 .text_modal {
   line-height: 150%;
+  font-family: var(--text-press, );
+  font-variation-settings: "wght" var(--font-weight-text);
+  text-transform: uppercase;
+  max-width: clamp(12.375rem, 11.077vw + 9.779rem, 14.625rem);
 }
 
 .disceta_modal {
@@ -415,12 +428,26 @@ dialog::backdrop {
 
 .button-ok {
   height: 38px;
+  text-transform: uppercase;
+  line-height: 90%;
+
 }
 
   @media (width <= 376px) {
     .header {
-      padding-block-start: 90px;
+      padding-block-start: 120px;
+      min-height: 323px;
+      padding-block-end: 25px;
+      }
+    
+    .header__title {
+      line-height: 49px;
     }
+
+    .theme-menu__list {
+      margin-left: 17px;
+    }
+  
     .button__save {
       flex-direction: column;
     }
